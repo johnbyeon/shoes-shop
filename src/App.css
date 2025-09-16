@@ -1,0 +1,7 @@
+.main-bg {
+  height: 300px;
+  /* 절대참조: public 밑에 있는 image */
+  background-image: url('/images/bg.png');
+  background-size: cover;
+  background-position: center;
+}
