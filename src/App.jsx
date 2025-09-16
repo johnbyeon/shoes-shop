@@ -10,9 +10,10 @@ import { Container, Col, Row } from 'react-bootstrap';
 
 import data from './data/data.js'
 
+import Product from './Product'
 function App() {
   //상품 정보를 받는 프로덕트 스테이트를 만든다 
-  const [product,setProduct] = useState(data);
+  const [product, setProduct] = useState(data);
   console.log(product);
   return (
     <>
@@ -21,33 +22,21 @@ function App() {
 
       {/* 메인 대문 사진 영역 */}
       <div className='main-bg'
-      style={{backgroundImage:`url('${bg_png}')`
-      }}
+        style={{
+          backgroundImage: `url('${bg_png}')`
+        }}
       />
 
       {/* */}
-    <Container>
-      <Row>
-        <Col className='text-center'>
-          <img src="http://zzzmini.github.io/images/shoes1.jpg"
-          width="80%" />
-          <h4>상품명</h4>
-          <p>상품설명</p>
-        </Col>
-        <Col className='text-center'>
-          <img src= {img_2}
-          width="80%" />
-          <h4>상품명</h4>
-          <p>상품설명</p>
-        </Col>
-        <Col className='text-center'>
-          <img src= "/images/shoes3.jpg"
-          width="80%" />
-          <h4>상품명</h4>
-          <p>상품설명</p>
-        </Col>
-      </Row>
-    </Container>
+      <Container>
+        <Row>
+          {product.map((shoes, _) =>
+            <Col className="text-center">
+              <Product key={shoes.id} shoes={shoes} />
+            </Col>
+          )}
+        </Row>
+      </Container>
 
     </>
   )
