@@ -30,10 +30,12 @@ function App() {
       {/* */}
       <Container>
         <Row>
-          {product.map((shoes, _) =>
-            <Col className="text-center">
-              <Product key={shoes.id} shoes={shoes} />
+          {product.map((shoes, _) =>{
+            return (
+            <Col className="text-center" key={shoes.id}>
+              <Product shoes={shoes} />
             </Col>
+          )}
           )}
         </Row>
       </Container>
