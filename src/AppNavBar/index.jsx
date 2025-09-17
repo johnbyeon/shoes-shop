@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import './AppNavBar.css'
 // Route : 컴포넌트 이동처리
 // Routes : url에 담겨있는 정보를 획등
@@ -16,6 +16,11 @@ function AppNavBar() {
                         <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
                         <Nav.Link onClick={()=>{navigate('/detail')}}>Detail</Nav.Link>
                         <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>
+                        <Nav.Link onClick={()=>{navigate('/about')}}>About</Nav.Link>
+                        <NavDropdown id="navbarScrollingDropdown" title="Link">
+                            <NavDropdown.Item onClick={()=>{navigate('/about/member')}}>member</NavDropdown.Item>
+                            <NavDropdown.Item onClick={()=>{navigate('/about/location')}}>location</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                 </Container>
             </Navbar>
