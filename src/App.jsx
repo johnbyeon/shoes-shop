@@ -3,19 +3,12 @@ import './App.css';
 import AppNavBar from './AppNavBar';
 //assets 폴더 내의 이미지 사용법 ->import해서 사용해야함
 import bg_png from './assets/images/bg.png';
-
-import img_2 from './assets/images/shoes2.jpg';
-
-import { Container, Col, Row } from 'react-bootstrap';
-
 import data from './data/data.js';
-
-import Product from './Product';
 // Route : 컴포넌트 이동처리
 // Routes : url에 담겨있는 정보를 획등
 // Link : Link 위치의 컴포넌트를 보여주는 역할
 import { Route,Routes } from 'react-router-dom';
-
+import Home from './Home';
 import About from './About';
 import Detail from './Detail';
 
@@ -35,7 +28,7 @@ function App() {
       />
       {/* 스프링에서 사용하는 컨트롤러 */}
       <Routes>
-        <Route path="/" element={<div>메인페이지</div>} />
+        <Route path="/" element={<div><Home product={product}/></div>} />
         <Route path="/detail/:id" element={<Detail product={product} setProduct={setProduct}/>} />
         <Route path="/cart" element={<div>장바구니페이지</div>} />
         <Route path='/about' element={<About />}> 
@@ -44,19 +37,7 @@ function App() {
         </Route>
         <Route path='*' element={<div>Page Not Found 404 Error</div>}></Route>
       </Routes>
-      {/* */}
-      <Container>
-        <Row>
-          {product.map((shoes, _) => {
-            return (
-              <Col className="text-center" key={shoes.id}>
-                <Product shoes={shoes} />
-              </Col>
-            )
-          }
-          )}
-        </Row>
-      </Container>
+
 
     </>
   )

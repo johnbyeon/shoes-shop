@@ -23,14 +23,14 @@ function Detail(props){
                     <img src={`/images/shoes${findProduct.id+1}.jpg`} width="100%" />
                 </div>
                 <div className="col-md-6">
-                    <h4>{findProduct.title}</h4>
+                    <h4 className="pt-5">{findProduct.title}</h4>
                     <p>{findProduct.content}</p>
                     <p>{findProduct.price}</p>
                     <button className="btn btn-danger">주문하기</button>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Detail
+export default Detail;
