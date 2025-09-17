@@ -14,7 +14,6 @@ function AppNavBar() {
                     <Navbar.Brand href="/">MuJinJang</Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
-                        <Nav.Link onClick={()=>{navigate('/detail')}}>Detail</Nav.Link>
                         <Nav.Link onClick={()=>{navigate('/cart')}}>Cart</Nav.Link>                      
                         <NavDropdown id="navbarScrollingDropdown" title="About">
                             <NavDropdown.Item onClick={()=>{navigate('/about/member')}}>member</NavDropdown.Item>
