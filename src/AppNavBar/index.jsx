@@ -24,7 +24,7 @@ function AppNavBar() {
             </Navbar>
             {/* Routing 정보를 한꺼번에 모아놓는 장소 */}
         </>
-    )
+    );
 }
 
 export default AppNavBar;
