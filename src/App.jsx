@@ -28,7 +28,7 @@ function App() {
       />
       {/* 스프링에서 사용하는 컨트롤러 */}
       <Routes>
-        <Route path="/" element={<div><Home product={product}/></div>} />
+        <Route path="/" element={<Home product={product}/>} />
         <Route path="/detail/:id" element={<Detail product={product} setProduct={setProduct}/>} />
         <Route path="/cart" element={<div>장바구니페이지</div>} />
         <Route path='/about' element={<About />}> 
