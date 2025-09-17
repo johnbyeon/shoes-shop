@@ -15,6 +15,7 @@ import Product from './Product';
 // Routes : url에 담겨있는 정보를 획등
 // Link : Link 위치의 컴포넌트를 보여주는 역할
 import { Route,Routes } from 'react-router-dom';
+
 import About from './About';
 import Detail from './Detail';
 
