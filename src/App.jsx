@@ -16,6 +16,7 @@ import Product from './Product';
 // Link : Link 위치의 컴포넌트를 보여주는 역할
 import { Route,Routes } from 'react-router-dom';
 
+import About from './About';
 import Detail from './Detail';
 
 function App() {
@@ -37,6 +38,10 @@ function App() {
         <Route path="/" element={<div>메인페이지</div>} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/cart" element={<div>장바구니페이지</div>} />
+        <Route path='/about' element={<About />}> 
+                <Route path='member'element={<div>Member</div>}></Route>
+                <Route path='location' element={<div>location</div>}></Route>
+        </Route>
         <Route path='*' element={<div>Page Not Found 404 Error</div>}></Route>
       </Routes>
       {/* */}
