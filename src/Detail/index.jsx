@@ -1,37 +1,41 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import Discount from "../Discount";
-
-function Detail(props){
-    const [state,setState] = useState(true);
-    const [inputData, setInputData]= useState('');
+import {Nav} from 'react-bootstrap';
+import TabContent from '../TabContent'
+function Detail(props) {
+    const [state, setState] = useState(true);
+    const [inputData, setInputData] = useState('');
     const [showAlret, setShowAlret] = useState(true);
+    //탭을 눌럿을때 선택되는 페이지값을 갖는 스테이트
+    const [tabSate,setTabState] = useState(0);
+
     //useEffect실행하기
-    useEffect(()=>{
-       const myTimer = setTimeout(()=>setShowAlret(false), 2000);
-       //기존에 사용한 타이머 삭제
-       return()=>{
-        clearTimeout(myTimer);
-       }
-    },[]);
-    useEffect(()=>{
-        if(isNaN(inputData.trim())){
+    useEffect(() => {
+        const myTimer = setTimeout(() => setShowAlret(false), 2000);
+        //기존에 사용한 타이머 삭제
+        return () => {
+            clearTimeout(myTimer);
+        }
+    }, []);
+    useEffect(() => {
+        if (isNaN(inputData.trim())) {
             setState(false);
-        }else{
+        } else {
             setState(true);
         }
-    },[inputData]);
+    }, [inputData]);
 
-    
-    let {id} = useParams();
+
+    let { id } = useParams();
     const navigate = useNavigate(); //파라미터를 변수로 저장할때에 중괄호 필수
     console.log(id);
 
-    const findProduct = props.product ? props.product.find(item=>{
-        return item.id===Number(id-1) 
-    }): null;
+    const findProduct = props.product ? props.product.find(item => {
+        return item.id === Number(id - 1)
+    }) : null;
 
-    if(findProduct == null){
+    if (findProduct == null) {
         alert("데이터를 찾을수 없습니다");
         navigate(-1);
         return null;
@@ -39,26 +43,39 @@ function Detail(props){
 
 
     console.log(findProduct);
-    return(
+    return (
         <div className="container">
             <div className="container mt-2">
                 {showAlret && <Discount />}
             </div>
             <div className="row">
                 <div className="col-md-6">
-                    <img src={`/images/shoes${findProduct.id+1}.jpg`} width="100%" />
+                    <img src={`/images/shoes${findProduct.id + 1}.jpg`} width="100%" />
                 </div>
                 <div className="col-md-6">
                     <h4 className="pt-5">{findProduct.title}</h4>
                     <p>{findProduct.content}</p>
-                    {!state && <div>오류</div>}
-                    <p>{findProduct.price}</p>
+                    <p>{findProduct.price.toLocaleString("ko-KR", { style: "currency", currency: "KRW" })}원</p>
+                    {/* {!state && <div>오류</div>}               
                     <p>수량 : 
                         <input type="text" onChange={(e)=>{setInputData(e.target.value)}} />
-                    </p>
+                    </p> */}
                     <button className="btn btn-danger">주문하기</button>
                 </div>
             </div>
+            <Nav variant="tabs" defaultActiveKey="/home">
+                <Nav.Item>
+                    <Nav.Link eventKey="link-1" onClick={()=>{setTabState(0)}}>버튼1</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link  eventKey="link-2" onClick={()=>{setTabState(1)}}>버튼2</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link eventKey="link-3" onClick={()=>{setTabState(2)}}>버튼3</Nav.Link>
+                </Nav.Item>
+            </Nav>
+            <TabContent tabSate={tabSate}/>
+
         </div>
     );
 }
