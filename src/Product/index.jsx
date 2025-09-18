@@ -5,6 +5,7 @@ function Product(props) {
     const navigate = useNavigate();
     return (
         <>
+            {console.log(props.shoes)}
             <img src={image} onClick={()=>{navigate(`/detail/${props.shoes.id+1}`)}}
                 width="80%" />
             <h4>{props.shoes.title}</h4>
