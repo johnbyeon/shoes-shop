@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import AppNavBar from './AppNavBar';
-//assets 폴더 내의 이미지 사용법 ->import해서 사용해야함
-import bg_png from './assets/images/bg.png';
+
 import data from './data/data.js';
 // Route : 컴포넌트 이동처리
 // Routes : url에 담겨있는 정보를 획등
@@ -20,15 +19,10 @@ function App() {
     <>
       {/* 네비게이션바 */}
       <AppNavBar />
-      {/* 메인 대문 사진 영역 */}
-      <div className='main-bg'
-        style={{
-          backgroundImage: `url('${bg_png}')`
-        }}
-      />
+
       {/* 스프링에서 사용하는 컨트롤러 */}
       <Routes>
-        <Route path="/" element={<Home product={product}/>} />
+        <Route path="/" element={<Home product={product} setProduct={setProduct}/>} />
         <Route path="/detail/:id" element={<Detail product={product} setProduct={setProduct}/>} />
         <Route path="/cart" element={<div>장바구니페이지</div>} />
         <Route path='/about' element={<About />}> 
