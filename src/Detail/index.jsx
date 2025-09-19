@@ -5,8 +5,11 @@ import { Nav , Spinner} from 'react-bootstrap';
 import TabContent from '../TabContent'
 import axios from 'axios';
 import { UserContext } from "../context/UserContext";
+import userStore from "../store/userStore";
 ///https://zzzmini.github.io/js/shoesReview.json
 function Detail(props) {
+
+    const { userName, productName, productStock, changeName, changeProductName } = userStore();
     let [detailFade, setDetailFade] = useState('');
 
     const {loginUser} = useContext(UserContext)
@@ -75,13 +78,17 @@ function Detail(props) {
                     <h4 className="pt-5">{findProduct.title}</h4>
                     <p>{findProduct.content}</p>
                     <p>{findProduct.price.toLocaleString("ko-KR", { style: "currency", currency: "KRW" })}원</p>
-                    <p>{loginUser.email}</p>
+                    {/* <p>{loginUser.email}</p> */}
 
                     {/* {!state && <div>오류</div>}               
                     <p>수량 : 
                         <input type="text" onChange={(e)=>{setInputData(e.target.value)}} />
                     </p> */}
-                    <button className="btn btn-danger">주문하기</button>
+                    <button className="btn btn-danger" onClick={()=>{
+                        changeName(),
+                        changeProductName(),
+                        console.log(productName)
+                        console.log(productStock)}}>주문하기</button>
                 </div>
             </div>
             <Nav variant="tabs" activeKey={`link-${tabSate}`} >

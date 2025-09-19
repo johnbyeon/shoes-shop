@@ -8,7 +8,11 @@ import { useState, useContext } from 'react';
 // Routes : url에 담겨있는 정보를 획등
 // Link : Link 위치의 컴포넌트를 보여주는 역할
 import { Link,useNavigate } from 'react-router-dom';
+import userStore from '../store/userStore.js';
+
 function AppNavBar() {
+    const {userName, productStock} = userStore();
+
     const navigate = useNavigate();
     const {loginUser} = useContext(UserContext);
     console.log(loginUser);
@@ -27,7 +31,7 @@ function AppNavBar() {
                     </Nav>
                 </Container>
                 <Nav className="ms-auto align-items-center">
-                    <Nav.Link as="span">{`${loginUser.name}`}</Nav.Link>
+                    <Nav.Link as="span">{`${userName} 로그인 됨`}</Nav.Link>
                 </Nav>
             </Navbar>
             {/* Routing 정보를 한꺼번에 모아놓는 장소 */}

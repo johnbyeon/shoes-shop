@@ -10,7 +10,7 @@ import { Route,Routes } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
 import Detail from './Detail';
-
+import Cart from './Cart';
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home product={product} setProduct={setProduct}/>} />
         <Route path="/detail/:id" element={<Detail product={product} setProduct={setProduct}/>} />
-        <Route path="/cart" element={<div>장바구니페이지</div>} />
+        <Route path="/cart" element={<Cart />} />
         <Route path='/about' element={<About />}> 
                 <Route path='member'element={<div>Member</div>}></Route>
                 <Route path='location' element={<div>location</div>}></Route>
