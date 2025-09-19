@@ -1,15 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import Discount from "../Discount";
-import {Nav} from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import TabContent from '../TabContent'
 function Detail(props) {
+    let [detailFade, setDetailFade] = useState('');
+
     const [state, setState] = useState(true);
     const [inputData, setInputData] = useState('');
     const [showAlret, setShowAlret] = useState(true);
     //탭을 눌럿을때 선택되는 페이지값을 갖는 스테이트
-    const [tabSate,setTabState] = useState(0);
-
+    const [tabSate, setTabState] = useState(0);
+    
+    useEffect(()=>{
+         const myTimer = setTimeout(() =>{
+            setDetailFade('ani_end')
+        }, 100);
+        //기존에 사용한 타이머 삭제
+        return (() => {
+            clearTimeout(myTimer);
+            setDetailFade('');
+        })
+    },[])
+    
     //useEffect실행하기
     useEffect(() => {
         const myTimer = setTimeout(() => setShowAlret(false), 2000);
@@ -44,7 +57,7 @@ function Detail(props) {
 
     console.log(findProduct);
     return (
-        <div className="container">
+        <div className={`container ani_start ${detailFade}`}>
             <div className="container mt-2">
                 {showAlret && <Discount />}
             </div>
@@ -63,18 +76,18 @@ function Detail(props) {
                     <button className="btn btn-danger">주문하기</button>
                 </div>
             </div>
-            <Nav variant="tabs" defaultActiveKey="/home">
+            <Nav variant="tabs" activeKey={`link-${tabSate}`} >
                 <Nav.Item>
-                    <Nav.Link eventKey="link-1" onClick={()=>{setTabState(0)}}>버튼1</Nav.Link>
+                    <Nav.Link eventKey="link-0" onClick={() => { setTabState(0) }}>제품별 특징</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link  eventKey="link-2" onClick={()=>{setTabState(1)}}>버튼2</Nav.Link>
+                    <Nav.Link eventKey="link-1" onClick={() => { setTabState(1) }}>사이즈</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="link-3" onClick={()=>{setTabState(2)}}>버튼3</Nav.Link>
+                    <Nav.Link eventKey="link-2" onClick={() => { setTabState(2) }}>배송</Nav.Link>
                 </Nav.Item>
             </Nav>
-            <TabContent tabSate={tabSate}/>
+            <TabContent tabSate={tabSate} product={findProduct}/>
 
         </div>
     );
