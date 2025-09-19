@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext} from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import Discount from "../Discount";
 import { Nav , Spinner} from 'react-bootstrap';
 import TabContent from '../TabContent'
 import axios from 'axios';
-
+import { UserContext } from "../context/UserContext";
 ///https://zzzmini.github.io/js/shoesReview.json
 function Detail(props) {
     let [detailFade, setDetailFade] = useState('');
 
-
+    const {loginUser} = useContext(UserContext)
     const [loding, setLoding] = useState(false);
     let [reviewResult,setReviewResult] = useState('');
     const [state, setState] = useState(true);
@@ -75,6 +75,8 @@ function Detail(props) {
                     <h4 className="pt-5">{findProduct.title}</h4>
                     <p>{findProduct.content}</p>
                     <p>{findProduct.price.toLocaleString("ko-KR", { style: "currency", currency: "KRW" })}원</p>
+                    <p>{loginUser.email}</p>
+
                     {/* {!state && <div>오류</div>}               
                     <p>수량 : 
                         <input type="text" onChange={(e)=>{setInputData(e.target.value)}} />
