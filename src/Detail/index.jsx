@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import Discount from "../Discount";
-import { Nav } from 'react-bootstrap';
+import { Nav , Spinner} from 'react-bootstrap';
 import TabContent from '../TabContent'
+import axios from 'axios';
+
+///https://zzzmini.github.io/js/shoesReview.json
 function Detail(props) {
     let [detailFade, setDetailFade] = useState('');
 
+
+    const [loding, setLoding] = useState(false);
+    let [reviewResult,setReviewResult] = useState('');
     const [state, setState] = useState(true);
     const [inputData, setInputData] = useState('');
     const [showAlret, setShowAlret] = useState(true);
     //탭을 눌럿을때 선택되는 페이지값을 갖는 스테이트
     const [tabSate, setTabState] = useState(0);
-    
-    useEffect(()=>{
-         const myTimer = setTimeout(() =>{
+
+    useEffect(() => {
+        const myTimer = setTimeout(() => {
             setDetailFade('ani_end')
         }, 100);
         //기존에 사용한 타이머 삭제
@@ -21,8 +27,8 @@ function Detail(props) {
             clearTimeout(myTimer);
             setDetailFade('');
         })
-    },[])
-    
+    }, [])
+
     //useEffect실행하기
     useEffect(() => {
         const myTimer = setTimeout(() => setShowAlret(false), 2000);
@@ -31,13 +37,13 @@ function Detail(props) {
             clearTimeout(myTimer);
         }
     }, []);
-    useEffect(() => {
-        if (isNaN(inputData.trim())) {
-            setState(false);
-        } else {
-            setState(true);
-        }
-    }, [inputData]);
+    // useEffect(() => {
+    //     if (isNaN(inputData.trim())) {
+    //         setState(false);
+    //     } else {
+    //         setState(true);
+    //     }
+    // }, [inputData]);
 
 
     let { id } = useParams();
@@ -86,8 +92,32 @@ function Detail(props) {
                 <Nav.Item>
                     <Nav.Link eventKey="link-2" onClick={() => { setTabState(2) }}>배송</Nav.Link>
                 </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link eventKey="link-3" onClick={ async () => {
+                        setTabState(3);
+                        try {
+                                setLoding(true);
+                                const result = await axios("https://zzzmini.github.io/js/shoesReview.json");
+                                let temp =[];
+                                result.data.map((review,_)=>{
+                                    if(review.productId == findProduct.id){
+                                        temp=[...temp,review];
+                                    }
+                                })
+                                setReviewResult(temp);
+                            } catch (error) {
+                                console.log('가져오기 실패 ', error)
+                            } finally {
+                                setLoding(false);
+                            }
+                       
+                    }}>리뷰</Nav.Link>
+                </Nav.Item>
             </Nav>
-            <TabContent tabSate={tabSate} product={findProduct}/>
+            {loding && <Spinner animation="border" role="status" style={{ cursor: "pointer" }}>
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>}
+            <TabContent tabSate={tabSate} product={findProduct} reviewResult={reviewResult}/>
 
         </div>
     );
