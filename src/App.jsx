@@ -11,6 +11,8 @@ import Home from './Home';
 import About from './About';
 import Detail from './Detail';
 
+
+
 function App() {
   //상품 정보를 받는 프로덕트 스테이트를 만든다 
   const [product, setProduct] = useState(data);
