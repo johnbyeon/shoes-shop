@@ -38,10 +38,10 @@ function Home(props){
                         if(count < 3){
                           setLoding(true);
                           const result1 = await axios(`https://zzzmini.github.io/js/react_data_0${count}.json`);
-                          setCount(count+1);
                           
                           let temp = [...props.product,...result1.data];
                           props.setProduct(temp);
+                          setCount(count+1);
                         }else{
                           alert('데이터가 없습니다.')
                         }
